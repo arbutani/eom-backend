@@ -154,6 +154,7 @@ export class OrdersService {
             });
             if (user) {
               const updates: any = {};
+              if (!user.name) updates.name = requestDto.customer_name;
               if (!user.phone) updates.phone = requestDto.customer_phone;
               if (!user.address_line) updates.address_line = requestDto.address_line;
               if (!user.landmark && requestDto.landmark)

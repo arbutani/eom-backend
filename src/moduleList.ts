@@ -8,6 +8,7 @@ import { ProductsModule } from './products/module/products.module';
 import { RefreshTokensModule } from './refresh_tokens/module/refresh_tokens.module';
 import { SharedModule } from './shared/module/shared.module';
 import { UsersModule } from './users/module/users.module';
+import { HealthModule } from './health/health.module';
 
 export const moduleList = [
   ThrottlerModule.forRoot([
@@ -23,4 +24,5 @@ export const moduleList = [
   AuthModule,
   ProductsModule,
   OrdersModule,
+  HealthModule,
 ];

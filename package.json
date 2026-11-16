@@ -8,6 +8,8 @@
   "scripts": {
     "build": "nest build",
     "deploy": "nest deploy",
+    "migrate": "sequelize-cli db:migrate",
+    "migrate:generate": "sequelize-cli migration:generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -31,11 +33,14 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "google-auth-library": "^11.3.4",
+    "helmet": "^8.3.0",
+    "moment": "^2.31.0",
     "pg": "^8.23.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5",
     "sequelize-typescript": "^2.1.6"
   },
   "devDependencies": {

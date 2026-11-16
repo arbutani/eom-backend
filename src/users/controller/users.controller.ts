@@ -21,6 +21,8 @@ import { UpdateProfileDto } from '../dto/updateProfile.dto';
 import { JwtAuthGuard } from 'src/JwtAuthGuard/jwt_auth.guard';
 import { Public } from 'src/JwtAuthGuard/public.decorator';
 import { CurrentUser } from 'src/JwtAuthGuard/current-user.decorator';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/guards/roles.decorator';
 import { usersRole } from '../../enum/users/usersType.enum';
 
 @UseGuards(JwtAuthGuard)
@@ -72,6 +74,8 @@ export class UsersController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(usersRole.ADMIN)
   async createUser(
     @Body() requestDto: usersRequestDto,
     @CurrentUser() user: { role: string },
@@ -144,6 +148,8 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(usersRole.ADMIN)
   async getAllUsers(@CurrentUser() user: { role: string }): Promise<any> {
     if (user.role !== usersRole.ADMIN) {
       throw new ForbiddenException('Admin access required');
@@ -162,6 +168,8 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(usersRole.ADMIN)
   async deleteUser(
     @Param('id') id: string,
     @CurrentUser() user: { role: string },

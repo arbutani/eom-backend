@@ -22,6 +22,8 @@ import { orderCancelDto } from '../dto/orderCancel.dto';
 import { JwtAuthGuard } from 'src/JwtAuthGuard/jwt_auth.guard';
 import { OptionalJwtAuthGuard } from 'src/JwtAuthGuard/optional_jwt_auth.guard';
 import { CurrentUser } from 'src/JwtAuthGuard/current-user.decorator';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/guards/roles.decorator';
 import { usersRole } from '../../enum/users/usersType.enum';
 
 @Controller('orders')
@@ -31,7 +33,7 @@ export class OrdersController {
     private readonly errorMessageService: ErrorMessageService,
   ) {}
 
-@Post()
+  @Post()
   @UseGuards(JwtAuthGuard)
   @Throttle({ default: { limit: 10, ttl: 60000 } })
   @UsePipes(
@@ -77,7 +79,8 @@ export class OrdersController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(usersRole.ADMIN)
   @Get()
   async getAllOrders(
     @CurrentUser() user: { role: string },
@@ -118,7 +121,8 @@ export class OrdersController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(usersRole.ADMIN)
   @Patch(':id/confirm')
   async confirmOrder(
     @Param('id') id: string,
