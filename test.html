@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <body>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div
+      id="g_id_onload"
+      data-client_id="963430831548-6u3diokc1dqv87g8gen6sbmi4m1603qv.apps.googleusercontent.com"
+      data-callback="handleCredential"
+    ></div>
+    <div class="g_id_signin"></div>
+
+    <textarea id="out" rows="10" cols="80"></textarea>
+
+    <script>
+      function handleCredential(res) {
+        document.getElementById('out').value = res.credential;
+        console.log(res.credential);
+      }
+    </script>
+  </body>
+</html>
